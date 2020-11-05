@@ -3,9 +3,9 @@ package model;
 public enum ColorType {
     ORANGE(1), WHITE(-1);
 
-    final int moveDir;
+    final int moveDirection;
 
-    ColorType(int moveDir) {
-        this.moveDir = moveDir;
+    ColorType(int moveDirection) {
+        this.moveDirection = moveDirection;
     }
 }
