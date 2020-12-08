@@ -1,12 +1,13 @@
 package model;
 
-import javafx.scene.paint.Color;
-
 import javafx.scene.shape.Rectangle;
 
 public class Tile extends Rectangle {
 
     private Checker checker;
+    private boolean light;
+    private double tileX;
+    private double tileY;
 
     public boolean hasChecker() {
         return checker != null;
@@ -21,10 +22,20 @@ public class Tile extends Rectangle {
     }
 
     public Tile(boolean light, int x, int y) {
-        setWidth(Size.TILE.getSize());
-        setHeight(Size.TILE.getSize());
-        relocate(x * Size.TILE.getSize(), y * Size.TILE.getSize());
+        this.light = light;
+        this.tileX = x;
+        this.tileY = y;
+    }
 
-        setFill(light ? Color.valueOf("#3E97D1") : Color.valueOf("#0A67A3"));
+    public boolean isLight() {
+        return light;
+    }
+
+    public double getTileX() {
+        return tileX;
+    }
+
+    public double getTileY() {
+        return tileY;
     }
 }
