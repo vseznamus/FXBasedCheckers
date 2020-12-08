@@ -13,7 +13,10 @@ import javafx.stage.Stage;
 import model.*;
 import model.move.MoveResult;
 import model.move.MoveType;
+import org.w3c.dom.Text;
 import service.BrainService;
+
+import java.awt.*;
 
 public class EntryClass extends Application {
 
@@ -21,13 +24,14 @@ public class EntryClass extends Application {
 
     private Group tileGroup = new Group();
     Group checkerGroup = new Group();
+    Group overGroup = new Group();
     private double mouseX, mouseY;
 
 
     Parent createContent() {
         Pane root = new Pane();
         root.setPrefSize(Size.WIDTH.getSize() * Size.TILE.getSize(), Size.HEIGHT.getSize() * Size.TILE.getSize());
-        root.getChildren().addAll(tileGroup, checkerGroup);
+        root.getChildren().addAll(tileGroup, checkerGroup, overGroup);
 
         for (int i = 0; i < game.initTiles().size(); i++) {
             Tile newTile = game.initTiles().get(i);
@@ -68,14 +72,6 @@ public class EntryClass extends Application {
                 }
 
             });
-
-            if (game.valueOfWhiteAlive == 0 || game.valueOfOrangeAlive == 0) {
-                Rectangle finishRect = new Rectangle();
-                finishRect.setHeight(100);
-                finishRect.setWidth(200);
-                finishRect.setFill(Color.valueOf("#FADADD"));
-                root.getChildren().add(finishRect);
-            }
 
         }
         return root;

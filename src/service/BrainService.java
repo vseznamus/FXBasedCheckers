@@ -12,7 +12,7 @@ public class BrainService {
     public Tile[][] board = new Tile[Size.WIDTH.getSize()][Size.HEIGHT.getSize()];
     public ArrayList<Checker> checkerRemover = new ArrayList<>();
     public ColorType turn = ColorType.WHITE;
-    public int valueOfWhiteAlive = 12;
+    public int valueOfWhiteAlive = 0;
     public int valueOfOrangeAlive = 12;
 
     public int toBoard(double displaced) {
@@ -81,7 +81,7 @@ public class BrainService {
         MoveResult result;
 
         if ((newX < 0 || newY < 0 || newX >= Size.WIDTH.getSize() || newY >= Size.HEIGHT.getSize())
-        || (turn == ColorType.WHITE && newChecker.getColor() == ColorType.ORANGE) || (turn == ColorType.ORANGE
+                || (turn == ColorType.WHITE && newChecker.getColor() == ColorType.ORANGE) || (turn == ColorType.ORANGE
                 && newChecker.getColor() == ColorType.WHITE)) {
             result = new MoveResult(MoveType.NONE);
         } else {
@@ -90,7 +90,6 @@ public class BrainService {
 
         int x0 = toBoard(newChecker.getOldX());
         int y0 = toBoard(newChecker.getOldY());
-
         switch (result.getType()) {
             case NONE -> newChecker.abortMove();
             case DEFAULT -> {
@@ -110,7 +109,9 @@ public class BrainService {
                 checkerRemover.add(otherChecker);
                 if (otherChecker.getColor() == ColorType.ORANGE) {
                     valueOfOrangeAlive -= 1;
-                } else valueOfWhiteAlive -=1;
+                } else valueOfWhiteAlive -= 1;
+                //TODO: Multikill
+
                 if (turn == ColorType.ORANGE)
                     turn = ColorType.WHITE;
                 else turn = ColorType.ORANGE;
